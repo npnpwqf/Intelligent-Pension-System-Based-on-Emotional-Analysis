@@ -1,0 +1,174 @@
+html,body,main{
+  height:100%;
+  font-size: 3mm;
+}
+.login2{
+    background: url(../picture/snow.jpg)center top no-repeat;
+    background-position: center center;
+    position:absolute;
+    background-size:100%;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    margin-top: 0%;
+    left: 0%;
+    float:left;
+    width:100%;
+    height:100%;
+  }
+.login{
+    position:fixed;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100%;
+    width:50%;
+    float:down;
+    left:25%;
+  }
+#login1{
+    position:absolute;
+    padding-left: 5em;
+    padding-right: 5em;
+    padding-top: 2em;
+    padding-bottom: 3em;
+    border: solid  white;
+    background-color: white;
+    width:50%;
+    margin-top:0%;
+  }
+#input1,#input2,#input3,#input4{
+ height:1.5em;
+ width:100%;
+}
+#button{
+  background-color:rgba(0, 174, 255, 0.719);
+  font-size: 3mm;
+  color:white;
+  vertical-align: middle;
+  text-align: center;
+
+display: inline-block;
+zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+*display: inline;
+vertical-align: baseline;
+margin: 0 1px;
+outline: none;
+cursor: pointer;
+text-align: center;
+text-decoration: none;
+font: 14px/100% Arial, Helvetica, sans-serif;
+padding: .1em 1em .3em;
+text-shadow: 0 1px 1px rgba(0,0,0,.3);
+ outline:none;
+
+}
+#yy{
+  text-align: center;
+  width:100%;
+  }
+#button1{
+  background-color:transparent;
+  color:red;
+  vertical-align: middle;
+  text-align: center;
+  border-color:transparent;
+  font-size: 3mm;
+}
+#button2{
+  background-color:transparent;
+  color:grey;
+  vertical-align: middle;
+  text-align: center;
+  border-color:transparent;
+  font-size: 5mm;
+}
+#hint{
+  color:red;
+}
+#hint1{
+  color:green;
+}
+#id{
+  height:2em;
+  display: flex;
+flex-flow: row nowrap;
+align-items: center;
+  text-align: center;
+  justify-content:space-between;
+  width:100%;
+}
+#idd{
+  width:100%;
+margin-right:0%;
+ float:right;
+}
+#text{
+  display: flex;
+flex-flow: row nowrap;
+align-items: center;
+  text-align: center;
+  justify-content:space-between;
+  width:100%;
+  margin-left:0%;
+}
+#text1{
+  display: flex;
+  margin-left:0%;
+}
+#check,#span1{
+  vertical-align: middle;
+}
+#check{
+  margin-left:0%;
+}
+
+.login-owl{
+   margin-left:38%;
+   height:30%;
+   width:30%;
+   margin-top:6%;
+   background: url(../picture/owl-login.png)bottom no-repeat;
+    background-position: center center;
+
+       background-size: 100%;
+
+z-index:998;
+position:relative;
+
+
+}
+.arms{
+height:5%;
+margin-top:-12%;
+width:23%;
+margin-left:41.5%;
+position:relative;
+z-index:999;
+
+
+
+}
+.arm{
+   margin-left:0%;
+   height:65%;
+   width:20%;
+   background: url(../picture/ph-owl-arml.png)left no-repeat;
+  background-position: center center;
+  border-radius: 15px;
+   position:relative;
+ float:right;
+  z-index:999;
+
+}
+.arm-r{
+   margin-right:0%;
+   height:65%;
+   width:20%;
+   background: url(../picture/ph-owl-arml.png)right no-repeat;
+  background-position: center center;
+  border-radius: 15px;
+   position:relative;
+  z-index:999;
+}
+
+

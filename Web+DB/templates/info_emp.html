@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="{% static '/img/apple-icon.png' %}">
+	<link rel="icon" type="image/png" sizes="96x96" href="{% static '/img/favicon.png' %}">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>智慧养老系统</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="{% static '/css/animate.min.css' %}" rel="stylesheet"/>
+
+    <!--  Paper Dashboard core CSS    -->
+    <link href="{% static '/css/paper-dashboard.css' %}" rel="stylesheet"/>
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="{% static '/css/demo.css' %}" rel="stylesheet" />
+
+    <!--  Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href="{% static '/css/themify-icons.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<header class=toph >
+    <div style="text-align:center">
+        <h3 title="Camp Chippewa"><img class="logo" src="./{% static '/img/toph2.png' %}" alt="Camp Chippewa"></h3>
+    </div>
+</header>
+
+<div class="wrapper">
+	<div class="sidebar" data-background-color="white" data-active-color="danger">
+
+    <!--
+		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
+		Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+	-->
+
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    <img class="logo" src="./{% static '/img/logo.png' %}" alt="Camp Chippewa">
+                    5 Pigs
+                </a>
+            </div>
+
+             <ul class="nav">
+                <li class="active">
+                    <a href="/homepage">
+                        <i class="ti-panel"></i>
+                        <p>主页</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/getinfo_old">
+                        <i class="ti-user"></i>
+                        <p>人员管理</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/eventRecord">
+                        <i class="ti-view-list-alt"></i>
+                        <p>事件记录</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/statistic">
+                        <i class="ti-text"></i>
+                        <p>统计分析</p>
+                    </a>
+                </li>
+            </ul>
+    	</div>
+    </div>
+
+    <div class="main-panel">
+		<nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar bar1"></span>
+                        <span class="icon-bar bar2"></span>
+                        <span class="icon-bar bar3"></span>
+                    </button>
+                    <a class="navbar-brand" href="/getinfo_old.html">返回</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+						<li>
+                            <a href="/logout">
+								<i class="ti-back-left"></i>
+								<p>退出</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 col-md-7">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">添加新工作人员信息</h4>
+                            </div>
+                            <div class="content">
+                                <form method="post" action="addinfo_emp" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                                <label>头像</label>
+                                                <input type="file" name="img_emp" id="img_emp" class="form-control border-input"  placeholder="请上传照片">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                                <label>姓名</label>
+                                                <input type="text" name="name_emp" id="name_emp"  class="form-control border-input" displaceholder="请输入姓名">
+                                        </div>
+                                        <div class="col-md-4">
+                                                <label>手机</label>
+                                                <input type="text" name="phone_emp" id="phone_emp" class="form-control border-input" placeholder="请输入手机号" >
+
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label>性别</label>
+                                                <input type="text" name= "gender_emp" id= "gender_emp" class="form-control border-input"  placeholder="请输入男/女" >
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>身份证号</label>
+                                                <input type="number" name="id_card_emp" class="form-control border-input" placeholder="请输入身份证号">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>生日</label>
+                                                    <input type="text" name="birthday_emp" class="form-control border-input" placeholder="请输入出生日期">
+                                                </div>
+                                            </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>入职时间</label>
+                                                <input type="text" name="checkin_emp" class="form-control border-input" placeholder="请输入入院时间" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>离职时间</label>
+                                                <input type="text" name="checkout_emp" class="form-control border-input" placeholder="请输入出院时间">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>简介</label>
+                                                <textarea rows="5" name="descrip_old" class="form-control border-input" placeholder="请简要描述相关情况"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit"  class="btn btn-info btn-fill btn-wd">保存编辑</button>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="{% static '/js/jquery-1.10.2.js' %}" type="text/javascript"></script>
+	<script src="{% static '/js/bootstrap.min.js' %}" type="text/javascript"></script>
+
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="{% static '/js/bootstrap-checkbox-radio.js' %}"></script>
+
+	<!--  Charts Plugin -->
+	<script src="{% static '/js/chartist.min.js' %}"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="{% static '/js/bootstrap-notify.js' %}"></script>
+
+    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+	<script src="{% static '/js/paper-dashboard.js' %}"></script>
+
+	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+	<script src="{% static '/js/demo.js' %}"></script>
+<script>
+
+{#function check(){#}
+{#    var phone=$("#gender_old").val();#}
+{#    debugger;#}
+
+</script>
+</html>

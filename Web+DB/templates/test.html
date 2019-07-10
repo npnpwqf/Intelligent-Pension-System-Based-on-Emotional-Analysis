@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="{% static '/js/charts/echarts.min.js' %}"></script>
+    <script src="{% static '/js/jquery.min.js' %}"></script>
+    <script src="{% static '/js/jquery.timers-1.2.js' %}"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="bar" style="width: 800px;height:600px;"></div>
+    <div id="chart" style="width: 800px;height:600px;"></div>
+    <script type="text/javascript">
+    var list=['情感检测','交互检测','陌生人检测','禁止区域入侵检测'];
+    // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('bar'));
+ setTimeout(function () {
+
+    option = {
+        legend: {},
+        tooltip: {
+            trigger: 'axis',
+            showContent: false
+        },
+        dataset: {
+            source: [['事件','情感检测','交互检测','陌生人检测','禁止区域入侵检测'],],
+        },
+        xAxis: {type: 'category'},
+        yAxis: {gridIndex: 0},
+        grid: {top: '55%'},
+        series: [
+            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+            {type: 'line', smooth: true, seriesLayoutBy: 'row'},
+            {
+                type: 'pie',
+                id: 'pie',
+                radius: '30%',
+                center: ['50%', '25%'],
+                label: {
+                    formatter: '{b}: {@["情感检测"]} ({d}%)'
+                },
+                encode: {
+                    itemName: "event",
+                    value: "情感检测",
+                    tooltip: "情感检测"
+                }
+            }
+        ]
+    };
+
+    myChart.on('updateAxisPointer', function (event) {
+        var xAxisInfo = event.axesInfo[0];
+
+        if (xAxisInfo) {
+            var dimension = xAxisInfo.value + 1;
+            myChart.setOption({
+                series: {
+                    id: 'pie',
+                    label: {
+                        formatter: '{b}: {@[' + dimension + ']} ({d}%)'
+                    },
+                    encode: {
+                        value: dimension,
+                        tooltip: dimension
+                    }
+                }
+            });
+        }
+    });
+
+    myChart.setOption(option);
+
+});;
+    $('body').everyTime('5s','A',function(){
+        $.ajax({
+                url: "/getEvent",
+                type: "POST",
+                dataType:"json",
+                success: function (data) {
+                    myChart.setOption({
+                        dataset: {source:data["events"]},
+                    });
+                }
+        });
+    });
+
+
+    </script>
+</body>
+</html>

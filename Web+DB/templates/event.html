@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="{% static '/img/apple-icon.png' %}">
+	<link rel="icon" type="image/png" sizes="96x96" href="{% static '/img/favicon.png' %}">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>智能养老系统</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Bootstrap core CSS     -->
+
+    <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <!-- Animation library for notifications   -->
+    <link href="{% static '/css/animate.min.css' %}" rel="stylesheet"/>
+
+    <!--  Paper Dashboard core CSS    -->
+    <link href="{% static '/css/paper-dashboard.css' %}" rel="stylesheet"/>
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="{% static '/css/demo.css' %}" rel="stylesheet" />
+
+    <link href="{% static '/css/themify-icons.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<header class=toph >
+    <div style="text-align:center">
+        <h3 title="Camp Chippewa"><img class="logo" src="{% static '/img/toph2.png' %}" alt="Camp Chippewa"></h3>
+    </div>
+</header>
+
+<div class="wrapper">
+	<div class="sidebar" data-background-color="white" data-active-color="danger">
+
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    <img class="logo" src="{% static '/img/logo.png' %}" alt="Camp Chippewa">
+                    5 Pigs
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li>
+                    <a href="/homepage">
+                        <i class="ti-panel"></i>
+                        <p>主页</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="table.html">
+                        <i class="ti-user"></i>
+                        <p>人员管理</p>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="/eventRecord">
+                        <i class="ti-view-list-alt"></i>
+                        <p>事件记录</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/statistic">
+                        <i class="ti-text"></i>
+                        <p>统计分析</p>
+                    </a>
+                </li>
+            </ul>
+    	</div>
+    </div>
+
+    <div class="main-panel">
+		<nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar bar1"></span>
+                        <span class="icon-bar bar2"></span>
+                        <span class="icon-bar bar3"></span>
+                    </button>
+                    <a class="navbar-brand" href="">事件列表</a>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="content">
+
+
+                <div class="row">
+                    <div class="panel  panel-success">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapseOne">
+                                    情感分析检测
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                {% for item in feeling %}
+                                <div class="col-lg-4 col-md-5">
+                                    <div class="card" >
+
+                                        <div class="image" data-toggle="modal" data-target="#myModal" onclick='Value("{{ item.id }}")'>
+                                            <img  src="/static/eventPic/{{ item.pic_name }}"/>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="row">
+                                                <h6>事件：情感检测                  <br/></h6>
+                                                <h7>老人姓名：{{ item.name }}<br/></h7>
+                                                <h7>发生时间：{{ item.event_date }}<br/></h7><br>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel  panel-success">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapseTwo">
+                                    义工交互检测
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                {% for item in communication %}
+                                <div class="col-lg-4 col-md-5">
+                                    <div class="card" >
+
+                                        <div class="image">
+                                            <img  src="/static/eventPic/{{ item.pic_name }}"/>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="row">
+                                                <h6>事件：义工交互检测              <br/></h6>
+                                                <h7>老人姓名：{{ item.name }}<br/></h7>
+                                                <h7>发生时间：{{ item.event_date }}<br/></h7><br>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel  panel-success">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapse3">
+                                    陌生人检测
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                {% for item in stranger %}
+                                <div class="col-lg-4 col-md-5">
+                                    <div class="card" >
+
+                                        <div class="image">
+                                            <img  src="/static/eventPic/{{ item.pic_name }}"/>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="row">
+                                                <h6>事件：陌生人检测                <br/></h6>
+                                                <h7></h7>
+                                                <h7>发生时间：{{ item.event_date }}<br/></h7><br>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel  panel-success">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapse4">
+                                    摔倒检测
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse4" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                {% for item in fall %}
+                                <div class="col-lg-4 col-md-5">
+                                    <div class="card" >
+
+                                        <div class="image">
+                                            <img  src="/static/eventPic/{{ item.pic_name }}"/>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="row">
+                                                <h6>事件：摔倒检测                  <br/></h6>
+                                                <h7>老人姓名：{{ item.name }}<br/></h7>
+                                                <h7>发生时间：{{ item.event_date }}<br/></h7><br>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel  panel-success">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapse5">
+                                    禁止区域入侵检测
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse5" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                {% for item in ban %}
+                                <div class="col-lg-4 col-md-5">
+                                    <div class="card" >
+
+                                        <div class="image">
+                                            <img  src="/static/eventPic/{{ item.pic_name }}"/>
+                                        </div>
+                                        <div class="text-center">
+                                            <div class="row">
+                                                <h6>事件：禁止区域入侵检测           <br/></h6>
+                                                <h7></h7>
+                                                <h7>发生时间：{{ item.event_date }}<br/></h7><br>
+                                            </div>
+                                        </div>
+
+                                </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    情感分析
+                </h4>
+            </div>
+            <div class="modal-body" >
+                <!--<input type="hidden" id="percentage" name="percentage" value="">-->
+                <!--<input type="hidden" id="categories" name="categories" value="">-->
+                <div id="mychart" style="width: 600px;height:400px;"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="{% static '/js/jquery-1.10.2.js' %}" type="text/javascript"></script>
+	<script src="{% static '/js/bootstrap.min.js' %}" type="text/javascript"></script>
+
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="{% static '/js/bootstrap-checkbox-radio.js' %}"></script>
+
+	<!--  Charts Plugin -->
+	<script src="{% static '/js/chartist.min.js' %}"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="{% static '/js/bootstrap-notify.js' %}"></script>
+    <script src="{% static '/js/charts/echarts.min.js' %}"></script>
+<script src="{% static '/js/jquery.timers-1.2.js' %}"></script>
+
+    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+	<script src="{% static '/js/paper-dashboard.js' %}"></script>
+
+	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+	<script src="{% static '/js/demo.js' %}"></script>
+<script>
+var myChart = echarts.init(document.getElementById('mychart'));
+        myChart.setOption({
+            title : {
+                text: '情感分析',
+                subtext: '各个情绪占比分析',
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: []
+            },
+            series : [
+                {
+                    name: '情绪',
+                    type: 'pie',
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    data: [],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+	    });
+        function Value(id){
+            debugger;
+            $.ajax({
+                url: '/eventRecord',
+                type: "POST",
+                data:{"id":id},
+                success: function (data) {
+                    data = JSON.parse(data);
+                    // 填入数据
+                    myChart.setOption({
+                        legend: {
+                            data:data.categories
+                        },
+                        series: [{
+                            // 根据名字对应到相应的系列
+                            name: '情绪',
+                            data: data.percentage
+                        }]
+                    });
+
+                }
+            });
+
+}
+$('body').everyTime('2s','A',function(){
+        $.ajax({
+                url: "/getEvent",
+                type: "POST",
+                dataType:"json",
+                data:{},
+                success: function (data) {
+                    if (data["notifyList"]){
+                        for(item in data["notifyList"]){
+                            $.notify({
+                                icon:"ti-info-alt",
+                                url:"/eventRecord",
+                                message: data["notifyList"][item]
+
+                            },{
+                                type: 'danger',
+                                timer: 10000
+                            });
+                        }
+                    }
+                }
+        });
+    });
+</script>
+</html>

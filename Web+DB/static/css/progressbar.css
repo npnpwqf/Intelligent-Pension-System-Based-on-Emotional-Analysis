@@ -1,0 +1,163 @@
+.sonny_progressbar {
+  margin-bottom: 20px;
+}
+.sonny_progressbar p.title {
+  margin-bottom: 15px;
+}
+.sonny_progressbar .bar-container {
+  position: relative;
+  height: 6px !important;
+}
+.sonny_progressbar .bar-container.shadow {
+  -moz-box-shadow: 0px 5px 7px -3px rgba(0,0,0,.5);
+  -webkit-box-shadow: 0px 5px 7px -3px rgba(0,0,0,.5);
+  box-shadow: 0px 5px 7px -3px rgba(0,0,0,.5);
+}
+.sonny_progressbar .backgroundBar {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.sonny_progressbar .bar {
+  border-radius: 3px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.sonny_progressbar .targetBar {
+  background-color: transparent !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  -webkit-animation: Animation 2s infinite ease-in-out;
+  -moz-animation: Animation 2s infinite ease-in-out;
+  animation: Animation 2s infinite ease-in-out;
+}
+.sonny_progressbar .targetBar.loader {
+  -webkit-animation: AnimationB 4s infinite ease-in-out;
+  -moz-animation: AnimationB 4s infinite ease-in-out;
+  animation: AnimationB 4s infinite ease-in-out;
+  background-image: url('animated-overlay.gif');
+}
+.sonny_progressbar .bar-container.border .bar, .sonny_progressbar .bar-container.border .targetBar, .sonny_progressbar .bar-container.border .backgroundBar {
+  border-bottom: 3px solid rgba(0,0,0,.2);
+}
+.sonny_progressbar .progress-percent {
+  font-size: 16px;
+  position: absolute;
+  right: 15px;
+}
+@keyframes Animation {
+  0%   { opacity:.4; }
+  50%   { opacity:1; }
+  100% { opacity:.4; }
+}
+@-moz-keyframes Animation{
+  0%   { opacity:.4; }
+  50%   { opacity:1; }
+  100% { opacity:.4; }
+}
+@-webkit-keyframes Animation{
+  0%   { opacity:.4; }
+  50%   { opacity:1; }
+  100% { opacity:.4; }
+}
+@keyframes AnimationB {
+  0%   { opacity:.01; }
+  50%   { opacity:.1; }
+  100% { opacity:.01; }
+}
+@-moz-keyframes AnimationB {
+  0%   { opacity:.01; }
+  50%   { opacity:.1; }
+  100% { opacity:.01; }
+}
+@-webkit-keyframes AnimationB {
+  0%   { opacity:.01; }
+  50%   { opacity:.1; }
+  100% { opacity:.01; }
+}
+/* DashBoard Chart */
+/**
+ * Inspiration for this project found at:
+ * https://markus.oberlehner.net/blog/pure-css-animated-svg-circle-chart
+ * 1. The `reverse` animation direction plays the animation backwards
+ *    which makes it start at the stroke offset 100 which means displaying
+ *    no stroke at all and animating it to the value defined in the SVG
+ *    via the inline `stroke-dashoffset` attribute.
+ * 2. Rotate by -90 degree to make the starting point of the
+ *    stroke the top of the circle.
+ * 3. Using CSS transforms on SVG elements is not supported by Internet Explorer
+ *    and Edge, use the transform attribute directly on the SVG element as a
+ * .  workaround.
+ */
+
+.circle-chart {
+  margin-bottom: 35px;
+  height: 150px;
+  width: 150px;
+}
+.circle-chart__circle {
+  stroke: #00acc1;
+  stroke-width: 2;
+  stroke-linecap: square;
+  fill: none;
+  animation: circle-chart-fill 2s reverse; /* 1 */ 
+  transform: rotate(20deg); /* 2, 3 */
+  transform-origin: center; /* 4 */
+}
+/**
+ * 1. Rotate by -90 degree to make the starting point of the
+ *    stroke the top of the circle.
+ * 2. Scaling mirrors the circle to make the stroke move right
+ *    to mark a positive chart value.
+ * 3. Using CSS transforms on SVG elements is not supported by Internet Explorer
+ *    and Edge, use the transform attribute directly on the SVG element as a
+ * .  workaround.
+ */
+.circle-chart__circle--negative {
+  transform: rotate(-90deg) scale(1,-1); /* 1, 2, 3 */
+}
+.circle-chart__background {
+  stroke: #0e4cfb;
+  stroke-width: 2;
+  fill: none; 
+}
+.circle-chart__info {
+  animation: circle-chart-appear 2s forwards;
+  opacity: 0;
+  transform: translateY(0.3em);
+}
+.circle-chart__percent {
+  alignment-baseline: central;
+  text-anchor: middle;
+  font-size: 8px;
+  display: none;
+}
+.circle-chart__subline {
+  alignment-baseline: central;
+  text-anchor: middle;
+  font-size: 5px;
+}
+.success-stroke {
+  stroke: #e94f85;
+}
+.warning-stroke {
+  stroke: #ffbb33;
+}
+.danger-stroke {
+  stroke: #ff4444;
+}
+@keyframes circle-chart-fill {
+  to { stroke-dasharray: 0 100; }
+}
+@keyframes circle-chart-appear {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

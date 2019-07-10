@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+      {% load staticfiles %}
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="{% static '/img/apple-icon.png' %}">
+	<link rel="icon" type="image/png" sizes="96x96" href="{% static '/img/favicon.png' %}">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>智慧养老系统</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Animation library for notifications   -->
+    <link href="{% static '/css/animate.min.css' %}" rel="stylesheet"/>
+
+    <!--  Paper Dashboard core CSS    -->
+    <link href="{% static '/css/paper-dashboard.css' %}" rel="stylesheet"/>
+
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="{% static '/css/demo.css' %}" rel="stylesheet" />
+
+    <link href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" />
+   <link href="http://cdn.bootcss.com/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="{% static '/css/themify-icons.css' %}" rel="stylesheet">
+
+
+</head>
+<body>
+
+
+<header class=toph >
+    <div style="text-align:center">
+        <h3 title="Camp Chippewa"><img class="logo" src="{% static '/img/toph2.png' %}" alt="Camp Chippewa"></h3>
+    </div>
+</header>
+
+<div class="wrapper">
+    <div class="sidebar" data-background-color="white" data-active-color="danger">
+
+    <!--
+		Tip 1: you can change the color of the sidebar's background using: event-background-color="white | black"
+		Tip 2: you can change the color of the active button using the event-active-color="primary | info | success | warning | danger"
+	-->
+
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    <img class="logo" src="{% static '/img/logo.png' %}" alt="Camp Chippewa">
+                    5 Pigs
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li>
+                    <a href="/homepage">
+                        <i class="ti-panel"></i>
+                        <p>主页</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/getinfo_old">
+                        <i class="ti-user"></i>
+                        <p>人员管理</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/eventRecord">
+                        <i class="ti-view-list-alt"></i>
+                        <p>事件记录</p>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="/statistic">
+                        <i class="ti-text"></i>
+                        <p>统计分析</p>
+                    </a>
+                </li>
+
+            </ul>
+    	</div>
+    </div>
+     <div class="main-panel">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar bar1"></span>
+                        <span class="icon-bar bar2"></span>
+                        <span class="icon-bar bar3"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">统计分析</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/update_sys">
+								<i class="ti-user"></i>
+								<p>个人信息</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/logout">
+								<i class="ti-back-left"></i>
+								<p>退出</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <label class="sele_word">老人：</label>
+                    <select class="sele_box" id="oldperson"></select>
+                    <label class="sele_word">开始时间：</label>
+                    <input class="time_box" type="date" id="startdate" />
+                    <label class="sele_word">结束时间：</label>
+                    <input class="time_box" type="date" id="enddate" />
+                    <button class="sele_btn" id="check" onclick="check();">查看数据分析</button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+
+                                <h4 class="title">统计分析</h4>
+                                <p class="category">Data Performance</p>
+                                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                                <center>
+                                <div id="bar" style="width: 800px;height:600px;"></div>
+                                </center>
+                            </div>
+                            <div class="content">
+                                <!-- <div id="chartPreferences" class="ct-homepage ct-perfect-fourth"></div> -->
+                                <!-- 饼状图 -->
+
+                                <div class="footer">
+                                    <div class="chart-legend">
+                                        <i class="fa fa-circle text-info"></i> Open
+                                        <i class="fa fa-circle text-danger"></i> Bounce
+                                        <i class="fa fa-circle text-warning"></i> Unsubscribe
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="ti-timer"></i> Updated 5 seconds ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="{% static '/js/jquery-1.10.2.js' %}" type="text/javascript"></script>
+	<script src="{% static '/js/bootstrap.min.js' %}" type="text/javascript"></script>
+<script src="{% static '/js/jquery.timers-1.2.js' %}"></script>
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="{% static '/js/bootstrap-checkbox-radio.js' %}"></script>
+
+	<script src="{% static '/js/charts/echarts.min.js' %}"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="{% static '/js/bootstrap-notify.js' %}"></script>
+
+
+
+    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+	<script src="{% static '/js/paper-dashboard.js' %}"></script>
+
+	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+	<script src="{% static '/js/demo.js' %}"></script>
+<script src="{% static '/js/jquery.timers-1.2.js' %}"></script>
+<script>
+// 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('bar'));
+    myChart.showLoading();
+function dayChart(curDate,old){
+    var data=[['事件', '0点', '1点', '2点', '3点','4点', '5点',
+            '6点','7点', '8点', '9点','10点', '11点','12点','13点','14点', '15点','16点','17点',
+            '18点','19点','20点', '21点','22点','23点','24点'],['情感变化',],['义工交互',],['摔倒',]];
+    for(var i =0; i<24; i++){
+        for(var j=0;j<3;j++){
+            data[j].push(0);
+        }
+    }
+    debugger;
+    for( i in eventList[old] ){
+        var temp=eventList[old][i]["event_date"].split(' ');
+        if(temp[0] == curDate){
+            var hour=temp[1].split(':');
+            data[Number(eventList[old][i]["event_type"]+1)][Number(hour[0])+1]+=1;
+        }
+    }
+
+    myChart.hideLoading();
+    myChart.setOption({
+        legend: {},
+        tooltip: {
+                text: '当天发生事件次数',
+                subtext: '各个事件发生次数',
+                x:'center'
+                },
+        dataset: {
+            source: data
+        },
+        xAxis: {type: 'category'},
+        yAxis: {},
+        // Declare several bar series, each will be mapped
+        // to a column of dataset.source by default.
+        series: [
+            {type: 'bar',seriesLayoutBy: 'row'},
+            {type: 'bar',seriesLayoutBy: 'row'},
+            {type: 'bar',seriesLayoutBy: 'row'}
+        ]
+    });
+}
+    var eventList = {{ eventList|safe }};
+    var old_name = {{ old_name|safe }};
+    //给老人下拉框赋值
+    var optionTags='';
+    for (i in old_name){
+        optionTags+='<option value="'+i+'">'+old_name[i]+'</option>';
+    }
+    // 为下拉框拼接子标签
+    $('#oldperson').append(optionTags);
+
+    var now = new Date();
+    //格式化日，如果小于9，前面补0
+    var day = ("0" + now.getDate()).slice(-2);
+    //格式化月，如果小于9，前面补0
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    //拼装完整日期格式
+    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+    //完成赋值
+    $('#startdate').val(today);
+    //完成赋值
+    $('#enddate').val(today);
+
+
+
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('bar'));
+    myChart.showLoading();
+    dayChart(today,0);//一天内
+
+
+
+
+function check(){
+    debugger;
+    var temp1=$("#startdate").val().split(' ')[0];
+    var temp2=$("#enddate").val().split(' ')[0];
+    var startDate=ConvertStrToDate($("#startdate").val());
+    var endDate=ConvertStrToDate($("#enddate").val());
+    var old=Number($("#oldperson").val());
+
+    if(endDate<startDate){
+        alert("结束日期不能大于开始日期！!");
+    }
+    else{
+        if(temp1==temp2){
+            dayChart(temp1,old);//一天内
+        }
+        else{
+            var data=[['事件', ],['情感变化',],['义工交互',],['摔倒',]];
+            //多天
+            var countDay = parseInt((endDate-startDate)/1000/3600/24); //结束日期减去开始日期后转换成天数
+            for(var i=0;i<=countDay;i++){
+                var temp = new Date();
+                temp.setDate(startDate.getDate() + i);
+                //格式化日，如果小于9，前面补0
+                var day = ("0" + temp.getDate()).slice(-2);
+                //格式化月，如果小于9，前面补0
+                var month = ("0" + (temp.getMonth() + 1)).slice(-2);
+                //拼装完整日期格式
+                var result =temp.getFullYear()+"-"+(month)+"-"+(day) ;
+                data[0].push(result);
+                for(var j=1;j<4;j++){
+                    data[j].push(0);
+                }
+            }
+
+            for( i in eventList[old] ){
+                var cur=ConvertStrToDate(eventList[old][i]["event_date"].split(" ")[0]);
+                if(cur>=startDate){
+                    var countDay = parseInt((cur-startDate)/1000/3600/24); //结束日期减去开始日期后转换成天数
+                    data[Number(eventList[old][i]["event_type"]+1)][countDay+1]+=1;
+                }
+
+            }
+            myChart.setOption({
+                legend: {},
+                tooltip: {
+                        text: '当天发生事件次数',
+                        subtext: '各个事件发生次数',
+                        x:'center'
+                        },
+                dataset: {
+                    source: data
+                },
+                xAxis: {type: 'category'},
+                yAxis: {},
+                // Declare several bar series, each will be mapped
+                // to a column of dataset.source by default.
+                series: [
+                    {type: 'bar',seriesLayoutBy: 'row'},
+                    {type: 'bar',seriesLayoutBy: 'row'},
+                    {type: 'bar',seriesLayoutBy: 'row'}
+                ]
+            });
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+//把字符串日期转为日期
+function ConvertStrToDate(datetimeStr) {
+    var mydateint = Date.parse(datetimeStr);//数值格式的时间
+    if (!isNaN(mydateint)) {
+        var mydate = new Date(mydateint);
+        return mydate;
+    }
+    var mydate = new Date(datetimeStr);//字符串格式时间
+    var monthstr = mydate.getMonth() + 1;
+    if (!isNaN(monthstr)) {//转化成功
+        return mydate;
+    }//字符串格式时间转化失败
+    var dateParts = datetimeStr.split(" ");
+    var dateToday = new Date();
+    var year = dateToday.getFullYear();
+    var month = dateToday.getMonth();
+    var day = dateToday.getDate();
+    if (dateParts.length >= 1) {
+        var dataPart = dateParts[0].split("-");//yyyy-mm-dd  格式时间
+        if (dataPart.length == 1) {
+            dataPart = dateParts[0].split("/");//yyyy/mm/dd格式时间
+        }
+        if (dataPart.length == 3) {
+            year = Math.floor(dataPart[0]);
+            month = Math.floor(dataPart[1]) - 1;
+            day = Math.floor(dataPart[2]);
+        }
+    }
+    if (dateParts.length == 2) {//hh:mm:ss格式时间
+        var timePart = dateParts[1].split(":");//hh:mm:ss格式时间
+        if (timePart.length == 3) {
+            var hour = Math.floor(timePart[0]);
+            var minute = Math.floor(timePart[1]);
+            var second = Math.floor(timePart[2]);
+            return new Date(year, month, day, hour, minute, second);
+        }
+    }
+    else {
+        return new Date(year, month, day);
+    }
+}
+</script>
+<script>
+$('body').everyTime('2s','A',function(){
+        $.ajax({
+                url: "/getEvent",
+                type: "POST",
+                dataType:"json",
+                success: function (data) {
+                    if (data["notifyList"]){
+                        for(item in data["notifyList"]){
+                            $.notify({
+                                icon:"ti-info-alt",
+                                url:"/eventRecord",
+                                message: data["notifyList"][item]
+
+                            },{
+                                type: 'danger',
+                                timer: 10000
+                            });
+                        }
+                    }
+                }
+        });
+    });
+</script>
+</html>

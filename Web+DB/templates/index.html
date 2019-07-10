@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Login</title>
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static '/css/normalize.css' %}">
+	<link rel="stylesheet" href="{% static '/css/login.css' %}">
+		<link rel="stylesheet" href="{% static '/css/sign-up-login.css' %}">
+<link rel="stylesheet" type="/my_app/text/css" href="http://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="{% static '/css/inputEffect.css' %}">
+
+	<link rel="stylesheet" href="{% static '/css/tooltips.css' %}">
+
+	<link rel="stylesheet" href="{% static '/css/spop.min.css' %}">
+	  <link rel="shortcut icon" href="#" />
+
+<script src="{% static '/js/jquery.min.js' %}"></script>
+
+	<script src="{% static '/js/snow.js' %}"></script>
+
+		<script src="{% static '/js/jquery.pure.tooltips.js' %}"></script>
+
+	<script src="{% static '/js/spop.min.js' %}"></script>
+<script>
+
+document.getElementById("check").checked=false;
+ function change1(){
+                var str1=document.getElementById("login-id").value;
+                    var isChecked = document.getElementById("check").checked;
+                    if(checkCookieExist(str1)){
+                    document.getElementById("login-password").value=getCookie(str1);
+                    document.getElementById("check").checked=true;
+
+                }
+ }
+function setCookie (id, password) {
+  var Days = 30; //此 cookie 将被保存 30 天
+  var exp = new Date();
+  exp.setTime(exp.getTime() + 1000);
+  document.cookie = id + "="+ escape(password) +";expires=Sun, 17-Jan-2038 19:14:07 GMT";
+
+}
+function getCookie(id){
+  var aCookie = document.cookie.split("; ");
+  for (var i=0; i < aCookie.length; i++)
+  {
+   var aCrumb = aCookie[i].split("=");
+   if (id == aCrumb[0])
+   {
+    return aCrumb[1];
+   }
+  }
+  return null;
+}
+function checkCookieExist(name){
+ if (getCookie(name))
+  return true;
+ else
+  return false;
+}
+  function delCookie(id) {
+        document.cookie = id + '=;  expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+    }
+
+
+
+	(function() {
+		// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+		if (!String.prototype.trim) {
+			(function() {
+				// Make sure we trim BOM and NBSP
+				var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+				String.prototype.trim = function() {
+					return this.replace(rtrim, '');
+				};
+			})();
+		}
+
+		[].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+			// in case the input is already filled..
+			if( inputEl.value.trim() !== '' ) {
+				classie.add( inputEl.parentNode, 'input--filled' );
+			}
+
+			// events:
+			inputEl.addEventListener( 'focus', onInputFocus );
+			inputEl.addEventListener( 'blur', onInputBlur );
+		} );
+
+		function onInputFocus( ev ) {
+			classie.add( ev.target.parentNode, 'input--filled' );
+		}
+
+		function onInputBlur( ev ) {
+			if( ev.target.value.trim() === '' ) {
+				classie.remove( ev.target.parentNode, 'input--filled' );
+			}
+		}
+	})();
+
+	$(function() {
+		$('#login #login-password').focus(function() {
+			$('.login-owl').addClass('password');
+		}).blur(function() {
+			$('.login-owl').removeClass('password');
+		});
+
+	});
+
+
+	function goto_login(){
+		$("#login-id").val("");
+		$("#login-password").val("");
+		$("#tab-1").prop("checked",true);
+	}
+
+	//计算字符
+	function strlen(str){
+        var len = 0;
+        for (var i=0; i<str.length; i++) {
+        var c = str.charCodeAt(i);
+        //单字节加1
+        if ((c >= 0x0001 && c <= 0x007e) || (0xff60<=c && c<=0xff9f)) {
+        len++;
+        }
+        else {
+        len+=2;
+        }
+        }
+        return len;
+    }
+
+	function login(){//登录
+		var id = $("#login-id").val(),
+			password = $("#login-password").val(),
+			validatecode = null,
+			flag = false;
+		//判断密码是否为空
+		if(password == ""){
+			$.pt({
+        		target: $("#login-password"),
+        		position: 'r',
+        		align: 't',
+        		width: 'auto',
+        		height: 'auto',
+        		content:"Enter your password"
+        	});
+			flag = true;
+		}
+
+		if(flag){
+			return false;
+		}else{//登录
+			//提交表单
+			 var str1=document.getElementById("login-id").value;
+                var str2=document.getElementById("login-password").value;
+             var isChecked = document.getElementById("check").checked;
+                    if(!checkCookieExist(str1)&&isChecked ){
+                       setCookie(str1,str2);
+                 }
+                 else{
+               if(checkCookieExist(str1)&&!isChecked) {
+                  delCookie(str1);
+                  }
+                 }
+			return true;
+		}
+	}
+
+	function isLower(str,len) {
+
+		for (var i=0; i<len; i++)
+			if(str[i] < 'a' || str[i] > 'z')
+				return false;
+		return true;
+	}
+
+
+</script>
+<style type="text/css">
+html{width: 100%; height: 100%;}
+
+body{
+
+	background-repeat: no-repeat;
+
+	background-position: center center #2D0F0F;
+
+	background-color: #00BDDC;
+
+	background-image: url(static/images/snow.jpg);
+
+	background-size: 100% 100%;
+
+}
+
+.snow-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100001; }
+
+</style>
+</head>
+<body>
+	<!-- 雪花背景 -->
+	<div class="snow-container"></div>
+	<!-- 登录控件 -->
+	<div id="login">
+		<input id="tab-1" type="radio" name="tab" class="sign-in hidden" checked />
+		<input id="tab-2" type="radio" name="tab" class="sign-up hidden" />
+		<input id="tab-3" type="radio" name="tab" class="sign-out hidden" />
+		<div class="wrapper">
+			<!-- 登录页面 -->
+			<div class="login sign-in-htm">
+				<form class="container offset1 loginform" action="/login" method="POST" onsubmit="return login()">
+					<!-- 猫头鹰控件 -->
+					<div id="owl-login" class="login-owl">
+						<div class="hand"></div>
+						<div class="hand hand-r"></div>
+						<div class="arms">
+							<div class="arm"></div>
+							<div class="arm arm-r"></div>
+						</div>
+					</div>
+					<div class="pad input-container">
+						<section class="content">
+							<span class="input input--hideo">
+								<input class="input__field input__field--hideo" type="text" id="login-id"
+									autocomplete="off" placeholder="id" tabindex="1" name="id" onchange="change1()"/>
+								<label class="input__label input__label--hideo" for="login-id">
+									<i class="fa fa-fw fa-user icon icon--hideo"></i>
+									<span class="input__label-content input__label-content--hideo"></span>
+								</label>
+							</span>
+							<span class="input input--hideo">
+								<input class="input__field input__field--hideo" type="password" id="login-password" placeholder="Password" tabindex="2" name="password"/>
+								<label class="input__label input__label--hideo" for="login-password">
+									<i class="fa fa-fw fa-lock icon icon--hideo"></i>
+									<span class="input__label-content input__label-content--hideo"></span>
+								</label>
+							</span>
+						</section>
+						 <span id="hint1">{{form1.non_field_errors.0}}{{mes1}}</span>
+						{% if mes1 == 'You have already been login.' %}
+                         <input class="btt" type="button" tabindex="3" value="Homepage" style="color:red;" onclick="window.location.href=('/me')"/>
+								{% endif %}
+
+					</div>
+
+
+
+							 	<div class="form-actions">
+									<div id="text1">
+                        <input type="checkbox" id="check"/><span id="span1">Remember Me</span></div>
+									<div>
+
+						<input class="btn btn-primary" type="submit" tabindex="3" value="Login"
+							style="color:white;"/>
+										</div>
+						 </div>
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>
